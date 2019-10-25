@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Weather app</title>
+
+    <script src="https://kit.fontawesome.com/64cbbea002.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="border border-info" id="main">
+        <!--city-->
+        <div class="container">
+            <div class="row">
+
+                <div class="col-4">
+                    <h1 id="city">Lisbon</h1>
+                    <h4 id="day-hour"></h4>
+                </div>
+                <div class="col-3">
+                    <a type="submit" href="#" id="current-location" style=" float: right">Current City</a>
+                </div>
+                <div class="col-5">
+                    <form action="" id="search-city">
+                        <input type="search" class="form-control" id="city-input" aria-describedby="emailHelp"
+                                placeholder="Enter city name"/>
+                        <button type="submit" class="btn btn-outline-light" style=" float: right"><i
+                                        class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+                
+
+        <!--temperature-->
+        <div class="container">
+            <div class="row">
+                <div class="col-6 today">
+                    <img src="img/main-cloudy.png" alt="">
+            </div>
+            <div class="col-6" >
+                <h2 >
+                    <span id="temperature"></span>
+                    <span class="unit">
+                    <a href="#" id="celsius" class=""> <small>ºC</small></a>
+                    |
+                    <a href="#" id="fahrenheiht" class=""> <small>ºF</small></a>
+                    </span>
+                </h2>
+            </div>
+        </div>
+
+
+        <!--5days-->
+        <div class="container">
+            <div class="row days">
+                <div class="col-2 ">Wed</div>
+                <div class="col-2 ">Thu</div>
+                <div class="col-2 ">Fri</div>
+                <div class="col-2 ">Sat</div>
+                <div class="col-2">Sun</div>
+            </div>
+            <div class="row" >
+                <div class="col-2"><img class="weather-icon" src="img/sun.png" alt=""></div>
+                <div class="col-2"><img class="weather-icon" src="img/cloudy.png" alt=""></div>
+                <div class="col-2"><img class="weather-icon" src="img/shower.png" alt=""></div>
+                <div class="col-2"><img class="weather-icon" src="img/rain.png" alt=""></div>
+                <div class="col-2"><img class="weather-icon" src="img/shower.png" alt=""></div>
+            </div>
+            <div class="row temp">
+                <div class="col-2">22ºC</i></div>
+                <div class="col-2">19ºC</i></div>
+                <div class="col-2">20ºC</i></div>
+                <div class="col-2">18ºC</i></div>
+                <div class="col-2">17ºC</i></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="index.js"></script>
+</body>
+
+</html>
