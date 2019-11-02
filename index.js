@@ -29,8 +29,42 @@ showDay();
 function display(response) {
   let city = document.querySelector("#city");
   let temperature = document.querySelector("#temperature");
+  let iconElement = document.querySelector("#main-icon");
+  let icon = response.data.weather[0].icon;
+
   city.innerHTML = response.data.name;
   temperature.innerHTML = Math.round(response.data.main.temp);
+
+  switch (icon) {
+    case "01d":
+    case "01n":
+      iconElement.setAttribute("src", `img/sun.png`);
+      break;
+    case "02d":
+    case "02n":
+      iconElement.setAttribute("src", `img/cloudy.png`);
+      break;
+    case "03d":
+    case "03n":
+      iconElement.setAttribute("src", `img/cloudy.png`);
+      break;
+    case "04d":
+    case "04n":
+      iconElement.setAttribute("src", `img/cloudy.png`);
+      break;
+    case "09d":
+    case "09n":
+      iconElement.setAttribute("src", `img/shower.png`);
+      break;
+    case "10d":
+    case "10n":
+      iconElement.setAttribute("src", `img/rain.png`);
+      break;
+    case "11d":
+    case "11n":
+      iconElement.setAttribute("src", `img/rain2.png`);
+      break;
+  }
 }
 
 function getCurrentCity(event) {
@@ -53,16 +87,48 @@ function search(event) {
 let searchCity = document.querySelector("#search-city");
 searchCity.addEventListener("submit", getCurrentCity);
 
-//fake temperature
+//default temperature
 
 function defaultTemp(response) {
   let temperature = document.querySelector("#temperature");
-  console.log(response.data.main.temp);
+  let iconElement = document.querySelector("#main-icon");
+  let icon = response.data.weather[0].icon;
+
   temperature.innerHTML = Math.round(response.data.main.temp);
+  switch (icon) {
+    case "01d":
+    case "01n":
+      iconElement.setAttribute("src", `img/sun.png`);
+      break;
+    case "02d":
+    case "02n":
+      iconElement.setAttribute("src", `img/cloudy.png`);
+      break;
+    case "03d":
+    case "03n":
+      iconElement.setAttribute("src", `img/cloudy.png`);
+      break;
+    case "04d":
+    case "04n":
+      iconElement.setAttribute("src", `img/cloudy.png`);
+      break;
+    case "09d":
+    case "09n":
+      iconElement.setAttribute("src", `img/shower.png`);
+      break;
+    case "10d":
+    case "10n":
+      iconElement.setAttribute("src", `img/rain.png`);
+      break;
+    case "11d":
+    case "11n":
+      iconElement.setAttribute("src", `img/rain2.png`);
+      break;
+  }
 }
 
 function getDefaultTemperature() {
-  let apiUrlDefault = `https://api.openweathermap.org/data/2.5/weather?q=Porto&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
+  let apiUrlDefault = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
 
   axios.get(apiUrlDefault).then(defaultTemp);
 }
