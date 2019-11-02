@@ -33,6 +33,10 @@ h4 {
   font-family: "Roboto", sans-serif;
 }
 
+h6 {
+  color: #5d1451;
+}
+
 .unit {
   font-size: 20px;
   position: relative;
@@ -64,4 +68,12 @@ h4 {
 .weather-temp .active:hover {
   cursor: default;
   text-decoration: none;
+}
+
+.forecastIcons {
+  float: right;
+}
+
+.forecast-row {
+  color: #5d1451;
 }

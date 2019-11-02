@@ -24,6 +24,22 @@ function showDay() {
 
 showDay();
 
+//format hours
+
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+}
+
 //search function
 
 function display(response) {
@@ -69,6 +85,32 @@ function display(response) {
   }
 }
 
+//forecast
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  let forecast = null;
+  let icon = null;
+
+  forecastElement.innerHTML = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    icon = forecast.weather[0].icon;
+
+    forecastElement.innerHTML += `<div class="col-2" style="display: inline-block">
+                <h6>${formatHours(forecast.dt * 1000)}</h6>
+                <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="" width="85px" class="forecastIcons" id="icon-forecast">
+                <div class="forecast-temp">
+                    <strong>${Math.round(
+                      forecast.main.temp_max
+                    )}º</strong> ${Math.round(forecast.main.temp_min)}º
+                </div>
+            </div>
+  `;
+  }
+}
+
 function getCurrentCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#city-input");
@@ -76,6 +118,9 @@ function getCurrentCity(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
 
   axios.get(apiUrl).then(display);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function search(event) {
@@ -133,9 +178,37 @@ function getDefaultTemperature() {
   let apiUrlDefault = `https://api.openweathermap.org/data/2.5/weather?q=Paris&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
 
   axios.get(apiUrlDefault).then(defaultTemp);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=Paris&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
+  axios.get(apiUrl).then(defaultForecast);
 }
 
 getDefaultTemperature();
+
+//default forecast
+
+function defaultForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  let forecast = null;
+
+  forecastElement.innerHTML = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `<div class="col-2" style="display: inline-block">
+                <h6>${formatHours(forecast.dt * 1000)}</h6>
+                <img src="http://openweathermap.org/img/wn/${
+                  forecast.weather[0].icon
+                }@2x.png" alt="" width="85px" class="forecastIcons" id="icon-forecast">
+                <div class="forecast-temp">
+                    <strong>${Math.round(
+                      forecast.main.temp_max
+                    )}º</strong> ${Math.round(forecast.main.temp_min)}º
+                </div>
+            </div>
+  `;
+  }
+}
 
 //current location
 
