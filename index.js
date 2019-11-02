@@ -32,9 +32,11 @@ function display(response) {
   let iconElement = document.querySelector("#main-icon");
   let icon = response.data.weather[0].icon;
 
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  celsiusTemp = response.data.main.temp;
   city.innerHTML = response.data.name;
-  temperature.innerHTML = Math.round(response.data.main.temp);
-
+  temperature.innerHTML = Math.round(celsiusTemp);
   switch (icon) {
     case "01d":
     case "01n":
@@ -71,7 +73,6 @@ function getCurrentCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#city-input");
   let city = cityInput.value;
-
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
 
   axios.get(apiUrl).then(display);
@@ -94,6 +95,7 @@ function defaultTemp(response) {
   let iconElement = document.querySelector("#main-icon");
   let icon = response.data.weather[0].icon;
 
+  celsiusTemp = response.data.main.temp;
   temperature.innerHTML = Math.round(response.data.main.temp);
   switch (icon) {
     case "01d":
@@ -128,7 +130,7 @@ function defaultTemp(response) {
 }
 
 function getDefaultTemperature() {
-  let apiUrlDefault = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
+  let apiUrlDefault = `https://api.openweathermap.org/data/2.5/weather?q=Paris&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
 
   axios.get(apiUrlDefault).then(defaultTemp);
 }
@@ -140,6 +142,9 @@ getDefaultTemperature();
 function currentTemp(response) {
   let city = document.querySelector("#city");
   let temperature = document.querySelector("#temperature");
+
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
   city.innerHTML = response.data.name;
   temperature.innerHTML = Math.round(response.data.main.temp);
 }
@@ -147,7 +152,6 @@ function currentTemp(response) {
 function currentLocation(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
 
   axios.get(apiUrl).then(currentTemp);
@@ -159,3 +163,32 @@ function getCurrentLocation() {
 
 let btCurrent = document.querySelector("#current-location");
 btCurrent.addEventListener("click", getCurrentLocation);
+
+//convert to fahrenheit and back to celsius
+
+function displayFahrenheitTemp(event) {
+  event.preventDefault();
+  let temperature = document.querySelector("#temperature");
+  let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
+
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  temperature.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function displayCelsiusTemp(event) {
+  event.preventDefault();
+  let temperature = document.querySelector("#temperature");
+
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  temperature.innerHTML = Math.round(celsiusTemp);
+}
+
+let fahrenheitLink = document.querySelector("#fahrenheiht-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemp);
+
+let celsiusTemp = null;

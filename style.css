@@ -56,3 +56,12 @@ h4 {
 .today {
   text-align: right;
 }
+
+.weather-temp .active {
+  color: white;
+}
+
+.weather-temp .active:hover {
+  cursor: default;
+  text-decoration: none;
+}
