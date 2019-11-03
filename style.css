@@ -31,6 +31,11 @@
   color: white;
 }
 
+#descrip {
+  color: #5d1451;
+  font-size: 14px;
+}
+
 h1,
 h4 {
   color: #ffff;

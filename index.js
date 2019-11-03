@@ -49,7 +49,9 @@ function display(response) {
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let icon = response.data.weather[0].icon;
+  let description = document.querySelector("#descrip");
 
+  description.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = response.data.wind.speed;
   celsiusLink.classList.add("active");
@@ -176,7 +178,9 @@ function defaultTemp(response) {
   let icon = response.data.weather[0].icon;
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
+  let description = document.querySelector("#descrip");
 
+  description.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = response.data.wind.speed;
   celsiusTemp = response.data.main.temp;
@@ -286,7 +290,9 @@ function defaultForecast(response) {
 function currentTemp(response) {
   let city = document.querySelector("#city");
   let temperature = document.querySelector("#temperature");
+  let description = document.querySelector("#descrip");
 
+  description.innerHTML = response.data.weather[0].description;
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
   city.innerHTML = response.data.name;
