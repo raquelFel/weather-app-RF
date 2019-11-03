@@ -235,6 +235,7 @@ function defaultForecast(response) {
 
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
+    console.log(forecast);
     icon = forecast.weather[0].icon;
 
     switch (icon) {
@@ -292,12 +293,70 @@ function currentTemp(response) {
   temperature.innerHTML = Math.round(response.data.main.temp);
 }
 
+function displayCurrentForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  let forecast = null;
+  let icon = null;
+
+  forecastElement.innerHTML = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    icon = forecast.weather[0].icon;
+
+    switch (icon) {
+      case "01d":
+      case "01n":
+        icon = `img/sun.png`;
+        break;
+      case "02d":
+      case "02n":
+        icon = `img/cloudy.png`;
+        break;
+      case "03d":
+      case "03n":
+        icon = `img/cloudy.png`;
+        break;
+      case "04d":
+      case "04n":
+        icon = `img/cloudy.png`;
+        break;
+      case "09d":
+      case "09n":
+        icon = `img/shower.png`;
+        break;
+      case "10d":
+      case "10n":
+        icon = `img/rain.png`;
+        break;
+      case "11d":
+      case "11n":
+        icon = `img/rain.png`;
+        break;
+    }
+
+    forecastElement.innerHTML += `<div class="col-2" style="display: inline-block">
+                <h6>${formatHours(forecast.dt * 1000)}</h6>
+                <img src="${icon}" alt="" width="70px" class="forecastIcons" id="icon-forecast">
+                <div class="forecast-temp">
+                    <strong>${Math.round(
+                      forecast.main.temp_max
+                    )}º</strong> ${Math.round(forecast.main.temp_min)}º
+                </div>
+            </div>
+  `;
+  }
+}
+
 function currentLocation(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
 
   axios.get(apiUrl).then(currentTemp);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&APPID=f58b0854457e2f05df673d838cf4e8ca`;
+  axios.get(apiUrl).then(displayCurrentForecast);
 }
 
 function getCurrentLocation() {
