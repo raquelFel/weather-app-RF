@@ -46,8 +46,12 @@ function display(response) {
   let city = document.querySelector("#city");
   let temperature = document.querySelector("#temperature");
   let iconElement = document.querySelector("#main-icon");
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
   let icon = response.data.weather[0].icon;
 
+  humidityElement.innerHTML = response.data.main.humidity;
+  windElement.innerHTML = response.data.wind.speed;
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
   celsiusTemp = response.data.main.temp;
@@ -170,7 +174,11 @@ function defaultTemp(response) {
   let temperature = document.querySelector("#temperature");
   let iconElement = document.querySelector("#main-icon");
   let icon = response.data.weather[0].icon;
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
 
+  humidityElement.innerHTML = response.data.main.humidity;
+  windElement.innerHTML = response.data.wind.speed;
   celsiusTemp = response.data.main.temp;
   temperature.innerHTML = Math.round(response.data.main.temp);
   switch (icon) {

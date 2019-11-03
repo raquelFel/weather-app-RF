@@ -26,6 +26,10 @@
   font-size: 18px;
   font-weight: 400;
 }
+#humidity,
+#wind {
+  color: white;
+}
 
 h1,
 h4 {
@@ -59,7 +63,8 @@ h6 {
 }
 
 .today {
-  text-align: right;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .weather-temp .active {
@@ -81,4 +86,23 @@ h6 {
 
 .forecast-temp {
   text-align: center;
+}
+
+.main-image {
+  padding-top: 35px;
+}
+
+.weather-temp li {
+  list-style: none;
+  color: #5d1451;
+}
+
+.weather-temp ul {
+  padding-left: 15px;
+  position: relative;
+  margin-top: 110px;
+}
+
+.simbol {
+  color: white;
 }
