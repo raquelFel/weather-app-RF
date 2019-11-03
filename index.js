@@ -80,7 +80,7 @@ function display(response) {
       break;
     case "11d":
     case "11n":
-      iconElement.setAttribute("src", `img/rain2.png`);
+      iconElement.setAttribute("src", `img/rain.png`);
       break;
   }
 }
@@ -98,9 +98,40 @@ function displayForecast(response) {
     forecast = response.data.list[index];
     icon = forecast.weather[0].icon;
 
+    switch (icon) {
+      case "01d":
+      case "01n":
+        icon = `img/sun.png`;
+        break;
+      case "02d":
+      case "02n":
+        icon = `img/cloudy.png`;
+        break;
+      case "03d":
+      case "03n":
+        icon = `img/cloudy.png`;
+        break;
+      case "04d":
+      case "04n":
+        icon = `img/cloudy.png`;
+        break;
+      case "09d":
+      case "09n":
+        icon = `img/shower.png`;
+        break;
+      case "10d":
+      case "10n":
+        icon = `img/rain.png`;
+        break;
+      case "11d":
+      case "11n":
+        icon = `img/rain.png`;
+        break;
+    }
+
     forecastElement.innerHTML += `<div class="col-2" style="display: inline-block">
                 <h6>${formatHours(forecast.dt * 1000)}</h6>
-                <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="" width="85px" class="forecastIcons" id="icon-forecast">
+                <img src="${icon}" alt="" width="70px" class="forecastIcons" id="icon-forecast">
                 <div class="forecast-temp">
                     <strong>${Math.round(
                       forecast.main.temp_max
@@ -169,7 +200,7 @@ function defaultTemp(response) {
       break;
     case "11d":
     case "11n":
-      iconElement.setAttribute("src", `img/rain2.png`);
+      iconElement.setAttribute("src", `img/rain.png`);
       break;
   }
 }
@@ -190,16 +221,47 @@ getDefaultTemperature();
 function defaultForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   let forecast = null;
+  let icon = null;
 
   forecastElement.innerHTML = null;
 
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
+    icon = forecast.weather[0].icon;
+
+    switch (icon) {
+      case "01d":
+      case "01n":
+        icon = `img/sun.png`;
+        break;
+      case "02d":
+      case "02n":
+        icon = `img/cloudy.png`;
+        break;
+      case "03d":
+      case "03n":
+        icon = `img/cloudy.png`;
+        break;
+      case "04d":
+      case "04n":
+        icon = `img/cloudy.png`;
+        break;
+      case "09d":
+      case "09n":
+        icon = `img/shower.png`;
+        break;
+      case "10d":
+      case "10n":
+        icon = `img/rain.png`;
+        break;
+      case "11d":
+      case "11n":
+        icon = `img/rain.png`;
+        break;
+    }
     forecastElement.innerHTML += `<div class="col-2" style="display: inline-block">
                 <h6>${formatHours(forecast.dt * 1000)}</h6>
-                <img src="http://openweathermap.org/img/wn/${
-                  forecast.weather[0].icon
-                }@2x.png" alt="" width="85px" class="forecastIcons" id="icon-forecast">
+                <img src="${icon}" alt="" width="70px" class="forecastIcons" id="icon-forecast">
                 <div class="forecast-temp">
                     <strong>${Math.round(
                       forecast.main.temp_max

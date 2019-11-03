@@ -35,6 +35,7 @@ h4 {
 
 h6 {
   color: #5d1451;
+  text-align: center;
 }
 
 .unit {
@@ -76,4 +77,8 @@ h6 {
 
 .forecast-row {
   color: #5d1451;
+}
+
+.forecast-temp {
+  text-align: center;
 }
